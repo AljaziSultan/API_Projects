@@ -1,7 +1,9 @@
+package Week08_Assignments;
+
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
-public class Assignment01 {
+public class Assignment01W08 {
 
     public static void main(String[] args) {
 
