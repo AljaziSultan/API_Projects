@@ -21,7 +21,7 @@ public class Assignment13 {
 
     private static String url = "https://petstore.swagger.io/v2";
     private static String ID;
-    private static RequestSpecBuilder requestSpecBuilder;
+    static RequestSpecBuilder requestSpecBuilder;
 
     @BeforeAll
     public static void setUp() {
