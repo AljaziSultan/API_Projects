@@ -24,6 +24,9 @@ public class Assignment15
         requestSpecBuilder = new RequestSpecBuilder();
         requestSpecBuilder.setBasePath(URL);
     }
+    private Map<String, Object> getUserFromResponse(Response response) {
+        return response.as(Map.class);
+    }
     @Test
     public void create() {
         // User data
@@ -41,12 +44,8 @@ public class Assignment15
                 .body("name", equalTo(name)).body("email", equalTo(email));
         // Extract user ID for further requests
         ID = createResponse.then().extract().path("id");
-    }
-    private Map<String, Object> getUserFromResponse(Response response) {
-        return response.as(Map.class);
-    }
-    @Test(dependsOnMethods={"create"})
-    public void read() {
+//        _________________________________________________________________
+
         // Read user request
         Response readResponse = RestAssured.given()
                 .get("/users/" + ID);
@@ -55,10 +54,7 @@ public class Assignment15
                 .statusCode(200)
                 .body("id", CoreMatchers.equalTo(Integer.parseInt(String.valueOf(ID))))
                 .body("username", CoreMatchers.equalTo(getUserFromResponse(readResponse).get("username")));
-    }
-    @Test(dependsOnMethods={"create"})
-
-    public void update() {
+//        _________________________________________________________________
         // User data for update
         String updatedName = "Jasmine";
 
@@ -72,9 +68,8 @@ public class Assignment15
         updateResponse.then()
                 .statusCode(200)
                 .body("name", CoreMatchers.equalTo(updatedName));
-    }
-    @Test(dependsOnMethods={"create"})
-    public void deleteUSER() {
+//        _________________________________________________________________
+
         // Delete user request
         Response deleteResponse = RestAssured.given()
                 .delete("/users/" + ID);
